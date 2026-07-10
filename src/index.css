@@ -1,0 +1,291 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #FBF7F1;
+  --color-navy: #1B2A4A;
+  --color-green: #2D6A4F;
+  --color-red: #D94A4A;
+  --color-orange: #F4A261;
+  --color-yellow: #F0C75E;
+  --color-brown: #8B7D6B;
+
+  /* Library-inspired palette */
+  --color-forest: #1B4332;
+  --color-parchment: #F7F1E3;
+  --color-terracotta: #C1652F;
+  --color-ink: #1C2541;
+
+  --font-sans: "Inter", "DM Sans", system-ui, sans-serif;
+  --font-serif: "Fraunces", "DM Serif Display", Georgia, serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Bookmark ribbon accent */
+.bookmark-ribbon {
+  position: relative;
+  display: inline-block;
+  width: 4px;
+  height: 40px;
+  border-radius: 2px 2px 0 0;
+}
+.bookmark-ribbon::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid currentColor;
+}
+
+/* Book spine hover lift */
+.book-spine {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.book-spine:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Partner card tilt effect + dog-ear corner */
+.partner-card {
+  position: relative;
+  overflow: visible;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.partner-card:hover {
+  transform: perspective(600px) rotateY(-3deg);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+.partner-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0 0 0;
+  border-color: transparent;
+  transition: border-width 0.2s ease;
+}
+.partner-card:hover::after {
+  border-width: 0 32px 32px 0;
+  border-color: transparent #F7F1E3 transparent transparent;
+  filter: drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.12));
+}
+
+/* Count-up animation */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.count-up-enter {
+  animation: countUp 0.4s ease-out forwards;
+}
+
+/* Staggered partner reveal */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.partner-reveal {
+  animation: fadeSlideUp 0.4s ease-out forwards;
+}
+
+/* Stamp animation for pull quote */
+@keyframes stampIn {
+  0% { transform: scale(1.3); opacity: 0; }
+  60% { transform: scale(0.95); opacity: 1; }
+  80% { transform: scale(1.02); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.stamp-in {
+  animation: stampIn 0.45s ease-out forwards;
+}
+
+/* Paper grain texture */
+.paper-grain {
+  position: relative;
+}
+.paper-grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+/* Fleuron ornament divider */
+.fleuron-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #C1652F;
+  font-size: 28px;
+  opacity: 0.85;
+}
+.fleuron-divider::before,
+.fleuron-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, currentColor, transparent);
+}
+.fleuron-divider span {
+  font-family: Georgia, serif;
+  font-style: italic;
+  line-height: 1;
+}
+
+/* Loading screen particle float */
+@keyframes floatParticle {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.2; }
+  25% { transform: translateY(-20px) translateX(8px); opacity: 0.5; }
+  50% { transform: translateY(-8px) translateX(-4px); opacity: 0.3; }
+  75% { transform: translateY(-28px) translateX(6px); opacity: 0.4; }
+}
+
+/* Logo book opening animation */
+@keyframes bookOpen {
+  0% { transform: perspective(400px) rotateY(20deg); opacity: 0; }
+  60% { transform: perspective(400px) rotateY(-3deg); opacity: 1; }
+  100% { transform: perspective(400px) rotateY(0deg); opacity: 1; }
+}
+.book-open {
+  animation: bookOpen 0.7s ease-out forwards;
+}
+
+/* Wordmark fade-up */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up {
+  animation: fadeUp 0.6s ease-out forwards;
+}
+
+/* --- SITE-WIDE POLISH --- */
+
+/* Custom scrollbar - terracotta accent */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F7F1E3;
+}
+::-webkit-scrollbar-thumb {
+  background: #C1652F;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A85428;
+}
+
+/* Page-turn transition overlay */
+@keyframes pageTurnIn {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(0); }
+}
+@keyframes pageTurnOut {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+.page-turn-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #F7F1E3;
+  pointer-events: none;
+}
+.page-turn-overlay.entering {
+  animation: pageTurnIn 0.3s ease-in-out forwards;
+}
+.page-turn-overlay.exiting {
+  animation: pageTurnOut 0.3s ease-in-out forwards;
+}
+
+/* Back-to-top bookmark ribbon */
+@keyframes bookmarkSlideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+.back-to-top-ribbon {
+  position: fixed;
+  bottom: 40px;
+  right: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px 10px 18px;
+  background: #C1652F;
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: "Inter", system-ui, sans-serif;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px 0 0 6px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  transition: background 0.2s, transform 0.2s;
+  animation: bookmarkSlideIn 0.4s ease-out forwards;
+}
+.back-to-top-ribbon:hover {
+  background: #A85428;
+  transform: translateX(-4px);
+}
+.back-to-top-ribbon::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  right: 12px;
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 10px solid #C1652F;
+  transition: border-top-color 0.2s;
+}
+.back-to-top-ribbon:hover::after {
+  border-top-color: #A85428;
+}
+
+/* Scroll reveal - applied via JS, defined globally */
+@keyframes revealFadeSlide {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.reveal-visible {
+  animation: revealFadeSlide 0.5s ease-out forwards;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .page-turn-overlay {
+    display: none !important;
+  }
+}
