@@ -1,5 +1,9 @@
-import { BookOpen } from "lucide-react";
 import RevealOnScroll from "../components/RevealOnScroll";
+import gallery1 from "../assets/gallery/gallery-1.jpeg";
+import gallery2 from "../assets/gallery/gallery-2.jpeg";
+import gallery3 from "../assets/gallery/gallery-3.jpeg";
+
+const photos = [gallery1, gallery2, gallery3];
 
 export default function Gallery() {
   return (
@@ -17,21 +21,22 @@ export default function Gallery() {
         </div>
       </section></RevealOnScroll>
 
-      {/* Empty State */}
+      {/* Photo Grid */}
       <RevealOnScroll delay={100}><section className="bg-parchment paper-grain">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 text-center">
-          <div className="max-w-md mx-auto">
-            <div className="w-16 h-16 rounded-full bg-forest/10 flex items-center justify-center mx-auto mb-6">
-              <BookOpen className="w-7 h-7 text-forest" />
-            </div>
-            <h2 className="font-serif text-2xl md:text-3xl text-ink mb-3">
-              Photos Coming Soon
-            </h2>
-            <p className="text-ink/50 text-sm md:text-base leading-relaxed">
-              We're collecting fresh photos from our next donation drive.
-              Check back soon for updated shots of our volunteers, partners,
-              and books in action.
-            </p>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {photos.map((src, i) => (
+              <div
+                key={i}
+                className="aspect-square overflow-hidden rounded-lg shadow-sm"
+              >
+                <img
+                  src={src}
+                  alt={`Books Unbound gallery photo ${i + 1}`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section></RevealOnScroll>
